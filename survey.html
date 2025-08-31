@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberGuard - Survey</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+body{background:#0d0e12;color:#e0f7fa;overflow-x:hidden;}
+a{text-decoration:none;color:#0ff;}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(0,0,0,0.85);border-bottom:2px solid #0ff;}
+.logo{font-size:1.8rem;font-weight:700;text-shadow:0 0 8px #0ff;}
+.nav-links li{display:inline-block;margin-left:1.5rem;position:relative;}
+.nav-links a{transition:0.3s;}
+.nav-links a:hover{color:#f0f;text-shadow:0 0 5px #f0f,0 0 10px #0ff;}
+.dropdown-menu{display:none;position:absolute;top:35px;left:0;background:rgba(0,0,0,0.9);border:1px solid #0ff;border-radius:5px;list-style:none;padding:0.5rem 0;min-width:220px;z-index:10;}
+.dropdown-menu li a{display:block;padding:0.5rem 1rem;color:#e0f7fa;}
+.dropdown:hover .dropdown-menu{display:block;}
+
+.survey-container{max-width:700px;margin:4rem auto;padding:2rem;background:rgba(0,0,0,0.85);border-radius:15px;border:2px solid #0ff;box-shadow:0 0 20px #0ff;}
+.survey-container h2{text-align:center;font-size:2rem;margin-bottom:1rem;text-shadow:0 0 8px #0ff;}
+.survey-container p{text-align:center;margin-bottom:1rem;color:#ccc;}
+
+.progress-bar{width:100%;height:15px;background:#222;border-radius:10px;overflow:hidden;margin-bottom:1.5rem;}
+.progress{height:100%;width:0%;background:#26c6da;border-radius:10px;transition:width 0.3s ease;}
+
+.question{display:none;margin-bottom:2rem;}
+.question.active{display:block;}
+.options{text-align:center;margin-top:1rem;}
+.options button{padding:0.8rem 2rem;margin:0 0.5rem;border:none;border-radius:8px;cursor:pointer;font-weight:bold;transition:0.3s;background:#0ff;color:#000;}
+.options button:hover{background:#f0f;color:#fff;box-shadow:0 0 15px #f0f,0 0 25px #0ff;}
+.navigation{display:flex;justify-content:space-between;margin-top:2rem;}
+.navigation button{padding:0.7rem 1.8rem;border:none;border-radius:8px;font-weight:bold;cursor:pointer;transition:0.3s;background:#0ff;color:#000;}
+.navigation button:hover{background:#f0f;color:#fff;box-shadow:0 0 15px #f0f,0 0 25px #0ff;}
+#result{text-align:center;font-weight:bold;display:none;margin-top:1.5rem;color:#0f0;}
+
+footer{text-align:center;margin:4rem 1rem;color:#0ff;font-size:0.9rem;border-top:2px solid #0ff;padding-top:1rem;}
+footer a{color:#0ff;}
+#visitor-count{font-weight:bold;text-shadow:0 0 10px #0ff,0 0 20px #f0f;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">CyberGuard</div>
+  <ul class="nav-links">
+    <li><a href="home.html">Home</a></li>
+    <li><a href="survey.html">Survey</a></li>
+    <li class="dropdown">
+      <a href="#">Important Links ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="https://cybercrime.gov.in" target="_blank">Cybersecurity Complaints</a></li>
+        <li><a href="https://www.cert-in.org.in" target="_blank">CERT-In India</a></li>
+        <li><a href="https://www.ncsc.gov.in" target="_blank">NCSC</a></li>
+      </ul>
+    </li>
+    <li><a href="#" onclick="logout()">Logout</a></li>
+  </ul>
+</nav>
+
+<div class="survey-container">
+<h2>Cybersecurity Awareness Survey</h2>
+<p>Welcome, <span id="user-email"></span>!</p>
+<div class="progress-bar"><div class="progress" id="progress"></div></div>
+
+<div id="questions">
+  <div class="question active" data-answer="yes">1️⃣ Do you use strong, unique passwords for each account?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+  <div class="question" data-answer="yes">2️⃣ Do you verify links before clicking in emails or messages?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+  <div class="question" data-answer="yes">3️⃣ Do you use Two-Factor Authentication (2FA) on accounts?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+  <div class="question" data-answer="no">4️⃣ Do you share passwords with others?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+  <div class="question" data-answer="yes">5️⃣ Do you regularly update your devices and apps?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+  <div class="question" data-answer="yes">6️⃣ Do you check website URLs before entering sensitive info?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+  <div class="question" data-answer="no">7️⃣ Do you reuse passwords across multiple accounts?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+  <div class="question" data-answer="yes">8️⃣ Do you log out after using public/shared computers?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+  <div class="question" data-answer="yes">9️⃣ Do you keep antivirus software updated?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+  <div class="question" data-answer="yes">🔟 Do you avoid clicking unknown links in messages or emails?
+    <div class="options"><button onclick="selectAnswer('yes')">Yes</button><button onclick="selectAnswer('no')">No</button></div>
+  </div>
+</div>
+
+<div class="navigation">
+<button id="prevBtn" onclick="prevQuestion()">Previous</button>
+<button id="nextBtn" onclick="nextQuestion()">Next</button>
+</div>
+
+<div id="result"></div>
+</div>
+
+<footer>
+© 2025 CyberGuard | Contact: <a href="mailto:rajharendrasingh06@gmail.com">rajharendrasingh06@gmail.com</a><br>
+Visitor Count: <span id="visitor-count">0</span>
+</footer>
+
+<script>
+let count = localStorage.getItem('visitorCount');
+count = count?parseInt(count)+1:1;
+localStorage.setItem('visitorCount', count);
+document.getElementById('visitor-count').textContent = count.toLocaleString();
+
+const loggedInUser = localStorage.getItem('loggedInUser');
+if(!loggedInUser){
+  alert('Please login first.');
+  window.location.href='auth.html';
+} else {
+  document.getElementById('user-email').textContent = loggedInUser;
+}
+
+function logout(){
+  localStorage.removeItem('loggedIn');
+  localStorage.removeItem('loggedInUser');
+  window.location.href='auth.html';
+}
+
+let current = 0;
+const questions = document.querySelectorAll('.question');
+let userAnswers = new Array(questions.length).fill(null);
+
+function updateProgress(){
+  const progress = ((current)/questions.length)*100;
+  document.getElementById('progress').style.width = progress+'%';
+}
+
+function updateButtons(){
+  document.getElementById('prevBtn').style.display = current>0?'inline-block':'none';
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.textContent = (current === questions.length-1)?'Submit':'Next';
+  updateProgress();
+}
+
+function selectAnswer(ans){
+  userAnswers[current]=ans;
+  const btns=questions[current].querySelectorAll('button');
+  btns.forEach(b=>b.disabled=true);
+  btns.forEach(b=>{if(b.textContent.toLowerCase()===ans) b.style.boxShadow='0 0 15px #f0f,0 0 25px #0ff';});
+  document.getElementById('nextBtn').style.display='inline-block';
+}
+
+function nextQuestion(){
+  if(current<questions.length-1){
+    questions[current].classList.remove('active');
+    current++;
+    questions[current].classList.add('active');
+    questions[current].querySelectorAll('button').forEach(b=>b.disabled=false);
+    if(userAnswers[current]!==null){
+      const btns=questions[current].querySelectorAll('button');
+      btns.forEach(b=>{if(b.textContent.toLowerCase()===userAnswers[current]) b.style.boxShadow='0 0 15px #f0f,0 0 25px #0ff';});
+    }
+    updateButtons();
+  } else {
+    showResult();
+  }
+}
+
+function prevQuestion(){
+  if(current>0){
+    questions[current].classList.remove('active');
+    current--;
+    questions[current].classList.add('active');
+    questions[current].querySelectorAll('button').forEach(b=>b.disabled=false);
+    if(userAnswers[current]!==null){
+      const btns=questions[current].querySelectorAll('button');
+      btns.forEach(b=>{if(b.textContent.toLowerCase()===userAnswers[current]) b.style.boxShadow='0 0 15px #f0f,0 0 25px #0ff';});
+    }
+    updateButtons();
+  }
+}
+
+function showResult(){
+  let score=0;
+  for(let i=0;i<questions.length;i++){
+    if(userAnswers[i]===questions[i].dataset.answer) score++;
+  }
+  localStorage.setItem('lastSurveyScore', `✅ You scored ${score} out of ${questions.length}`);
+  document.getElementById('questions').style.display='none';
+  document.querySelector('.navigation').style.display='none';
+  document.getElementById('progress').style.width='100%';
+  const result = document.getElementById('result');
+  result.style.display='block';
+  result.innerHTML=`✅ You scored ${score} out of ${questions.length}. <br>Thanks for completing the survey!`;
+}
+
+updateButtons();
+</script>
+</body>
+</html>

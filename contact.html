@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberGuard - Contact</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Orbitron', sans-serif; }
+body { background:#0d0d0d; color:#0ff; overflow-x:hidden; }
+a { text-decoration:none; color:#0ff; }
+a:hover { color:#f0f; }
+
+/* NAVBAR */
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background: rgba(0,0,0,0.85); border-bottom:2px solid #0ff; position:sticky; top:0; z-index:100; }
+.navbar .logo { font-size:1.8rem; font-weight:bold; text-shadow:0 0 8px #0ff; }
+.nav-links li { display:inline-block; margin-left:1.5rem; position:relative; }
+.nav-links a { transition:0.3s; }
+.nav-links a:hover { text-shadow:0 0 5px #f0f,0 0 10px #0ff; }
+.dropdown-menu { display:none; position:absolute; top:35px; left:0; background: rgba(0,0,0,0.95); border:1px solid #0ff; border-radius:5px; list-style:none; padding:0.5rem 0; min-width:220px; z-index:10; }
+.dropdown-menu li a { display:block; padding:0.5rem 1rem; }
+.dropdown:hover .dropdown-menu { display:block; }
+
+/* CONTAINER */
+.contact-container { max-width:800px; margin:4rem auto; padding:2rem; background: rgba(0,0,0,0.85); border-radius:15px; border:2px solid #0ff; box-shadow:0 0 20px #0ff; transition:0.5s; }
+.contact-container h2 { text-align:center; font-size:2rem; margin-bottom:1.5rem; text-shadow:0 0 8px #0ff; }
+
+/* FORM */
+form { display:flex; flex-direction:column; gap:1rem; }
+input, textarea { padding:0.8rem; border-radius:8px; border:none; outline:none; font-family:'Orbitron', sans-serif; background:rgba(0,255,255,0.05); color:#0ff; }
+input[type="submit"] { background:#0ff; color:#000; font-weight:bold; cursor:pointer; transition:0.3s; border:none; }
+input[type="submit"]:hover { background:#f0f; color:#fff; box-shadow:0 0 15px #f0f,0 0 25px #0ff; }
+
+/* REPORT LINKS */
+.report-links { margin-top:2rem; display:flex; flex-direction:column; gap:1rem; text-align:center; }
+.report-links a { display:inline-block; padding:0.8rem 1.5rem; border-radius:8px; background:rgba(0,255,255,0.1); border:2px solid #0ff; color:#0ff; font-weight:bold; transition:0.3s; }
+.report-links a:hover { background:#0ff; color:#000; box-shadow:0 0 15px #0ff,0 0 25px #f0f; }
+
+/* FAQ */
+.faq { margin-top:3rem; }
+.faq-item { margin-bottom:1rem; border:2px solid #0ff; border-radius:8px; overflow:hidden; }
+.faq-item button { width:100%; text-align:left; padding:1rem; font-weight:bold; background:rgba(0,0,0,0.8); color:#0ff; border:none; cursor:pointer; outline:none; transition:0.3s; }
+.faq-item button:hover { background:#0ff; color:#000; box-shadow:0 0 10px #f0f,0 0 20px #0ff; }
+.faq-item .answer { padding:1rem; background:rgba(0,0,0,0.85); display:none; color:#ccc; }
+
+/* FOOTER */
+footer { text-align:center; margin:4rem 1rem; color:#0ff; font-size:0.9rem; border-top:2px solid #0ff; padding-top:1rem; }
+footer a { color:#0ff; }
+#visitor-count { font-weight:bold; text-shadow:0 0 10px #0ff,0 0 20px #f0f; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">CyberGuard</div>
+  <ul class="nav-links">
+    <li><a href="home.html">Home</a></li>
+    <li><a href="survey.html">Survey</a></li>
+    <li class="dropdown">
+      <a href="#">Important Links ▼</a>
+      <ul class="dropdown-menu">
+        <li><a href="https://www.cybercrime.gov.in" target="_blank">Cybersecurity Complaints</a></li>
+        <li><a href="https://www.ncsc.gov.in/" target="_blank">NCSC India</a></li>
+        <li><a href="https://www.cert-in.org.in/" target="_blank">CERT-In India</a></li>
+      </ul>
+    </li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="auth.html">Login/Register</a></li>
+  </ul>
+</nav>
+
+<div class="contact-container">
+  <h2>Feedback / Contact</h2>
+  <form onsubmit="submitFeedback(event)">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <input type="submit" value="Send Feedback">
+  </form>
+
+  <div class="report-links">
+    <h3>Report a Cyber Issue</h3>
+    <a href="https://www.cybercrime.gov.in" target="_blank">Cybercrime Portal (India)</a>
+    <a href="https://www.cert-in.org.in" target="_blank">CERT-In India</a>
+    <a href="https://www.ncsc.gov.in" target="_blank">NCSC India</a>
+  </div>
+
+  <div class="faq">
+    <h3>Frequently Asked Questions</h3>
+    <div class="faq-item">
+      <button onclick="toggleFaq(this)">What is phishing?</button>
+      <div class="answer">Phishing is an attempt to steal your personal information by pretending to be a trusted entity online.</div>
+    </div>
+    <div class="faq-item">
+      <button onclick="toggleFaq(this)">How to create a strong password?</button>
+      <div class="answer">Use a mix of letters, numbers, and symbols, and avoid using personal information.</div>
+    </div>
+    <div class="faq-item">
+      <button onclick="toggleFaq(this)">What should I do if I get a suspicious email?</button>
+      <div class="answer">Do not click links or download attachments. Report it to authorities if necessary.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2025 CyberGuard | Contact: <a href="mailto:rajharendrasingh06@gmail.com">rajharendrasingh06@gmail.com</a>
+  <br>
+  Visitor Count: <span id="visitor-count">0</span> | Last Updated: 30/08/2025
+  <br>
+  Disclaimer: This site is for educational and awareness purposes only.
+</footer>
+
+<script>
+// Visitor count
+let count = localStorage.getItem('visitorCount');
+if(!count) count = 1; else count = parseInt(count)+1;
+localStorage.setItem('visitorCount', count);
+document.getElementById('visitor-count').textContent = count.toLocaleString();
+
+// FAQ toggle
+function toggleFaq(button){
+  const ans = button.nextElementSibling;
+  ans.style.display = (ans.style.display==='block') ? 'none' : 'block';
+}
+
+// Feedback form submit
+function submitFeedback(event){
+  event.preventDefault();
+  alert('Thank you for your feedback!');
+  window.location.href = 'home.html';
+}
+</script>
+
+</body>
+</html>

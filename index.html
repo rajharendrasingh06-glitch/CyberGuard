@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberGuard Awareness & Survey</title>
+<style>
+body { font-family: Arial, sans-serif; background:#f4f6f8; color:#333; margin:0; padding:0; }
+header { background:#0b3d91; color:white; padding:15px; text-align:center; }
+nav { background:#0b3d91; padding:10px; display:flex; justify-content:center; }
+nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; }
+.container { max-width:900px; margin:20px auto; padding:20px; background:white; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+h2 { color:#0b3d91; }
+.tips { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:20px; }
+.tips .card { background:#e3f2fd; padding:10px; border-radius:6px; }
+#downloadPdfBtn, button[type="submit"] { margin-top:15px; padding:10px 20px; background:#0b3d91; color:white; border:none; border-radius:5px; cursor:pointer;}
+#downloadPdfBtn:hover, button[type="submit"]:hover { background:#092b6b; }
+footer { text-align:center; padding:10px; margin-top:20px; color:#555; }
+</style>
+</head>
+<body>
+
+<header>
+<h1>CyberGuard Awareness & Survey</h1>
+</header>
+
+<nav>
+<a href="#survey">Survey</a>
+<a href="#tips">Tips</a>
+</nav>
+
+<div class="container" id="survey">
+<h2>Cybersecurity Awareness Survey</h2>
+<form id="surveyForm">
+<ol>
+<li>
+<label>Do you use strong passwords for all accounts?</label><br>
+<input type="radio" name="q1" value="Yes"> Yes
+<input type="radio" name="q1" value="No"> No
+</li>
+<li>
+<label>Do you enable two-factor authentication (2FA)?</label><br>
+<input type="radio" name="q2" value="Yes"> Yes
+<input type="radio" name="q2" value="No"> No
+</li>
+<li>
+<label>Do you regularly update your software and apps?</label><br>
+<input type="radio" name="q3" value="Yes"> Yes
+<input type="radio" name="q3" value="No"> No
+</li>
+<li>
+<label>Do you avoid clicking unknown links in emails?</label><br>
+<input type="radio" name="q4" value="Yes"> Yes
+<input type="radio" name="q4" value="No"> No
+</li>
+<li>
+<label>Do you use antivirus software?</label><br>
+<input type="radio" name="q5" value="Yes"> Yes
+<input type="radio" name="q5" value="No"> No
+</li>
+<li>
+<label>Do you backup your important files regularly?</label><br>
+<input type="radio" name="q6" value="Yes"> Yes
+<input type="radio" name="q6" value="No"> No
+</li>
+<li>
+<label>Do you avoid using public Wi-Fi for sensitive transactions?</label><br>
+<input type="radio" name="q7" value="Yes"> Yes
+<input type="radio" name="q7" value="No"> No
+</li>
+<li>
+<label>Do you review privacy settings on social media?</label><br>
+<input type="radio" name="q8" value="Yes"> Yes
+<input type="radio" name="q8" value="No"> No
+</li>
+<li>
+<label>Do you use secure websites (https) for online transactions?</label><br>
+<input type="radio" name="q9" value="Yes"> Yes
+<input type="radio" name="q9" value="No"> No
+</li>
+<li>
+<label>Do you educate yourself about phishing & cyber threats?</label><br>
+<input type="radio" name="q10" value="Yes"> Yes
+<input type="radio" name="q10" value="No"> No
+</li>
+</ol>
+<button type="submit">Submit Survey</button>
+</form>
+
+<div id="result" style="margin-top:15px;font-weight:bold;"></div>
+</div>
+
+<div class="container" id="tips">
+<h2>Cybersecurity Tips</h2>
+<div class="tips">
+<div class="card">Use strong & unique passwords for each account.</div>
+<div class="card">Enable two-factor authentication wherever possible.</div>
+<div class="card">Keep your devices and apps updated.</div>
+<div class="card">Do not click on suspicious links or emails.</div>
+<div class="card">Regularly backup your important data.</div>
+<div class="card">Avoid using public Wi-Fi for banking or transactions.</div>
+<div class="card">Review privacy settings on social media.</div>
+<div class="card">Use HTTPS websites for online payments.</div>
+<div class="card">Educate yourself about common cyber threats.</div>
+<div class="card">Install and update antivirus & firewall software.</div>
+</div>
+</div>
+
+<div class="container">
+<button id="downloadPdfBtn">Download PDF</button>
+</div>
+
+<footer>
+Visitor Count: <span id="visitor-count">0</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+// Visitor Count
+let count = localStorage.getItem('visitorCount') || 0;
+count++;
+localStorage.setItem('visitorCount', count);
+document.getElementById('visitor-count').innerText = count;
+
+// Survey Submission
+document.getElementById('surveyForm').addEventListener('submit', function(e){
+e.preventDefault();
+let score=0;
+for(let i=1;i<=10;i++){
+let val = document.querySelector(`input[name="q${i}"]:checked`);
+if(val && val.value=="Yes") score++;
+}
+localStorage.setItem('cyberSurveyScore', score);
+document.getElementById('result').innerText = `You scored ${score}/10 in the Cyber Awareness Survey.`;
+localStorage.setItem('cyberUser','Guest'); // Example user
+});
+
+// PDF Download
+document.getElementById('downloadPdfBtn').addEventListener('click', ()=> {
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+doc.setFontSize(18);
+doc.text("CyberGuard Awareness & Survey", 10, 20);
+
+doc.setFontSize(12);
+doc.text("Disclaimer: This website is for educational purposes only.", 10, 30);
+
+const user = localStorage.getItem('cyberUser') || "Guest";
+doc.text(`User: ${user}`, 10, 40);
+
+const resultEl = document.getElementById('result');
+let resultText = resultEl ? resultEl.innerText : "Survey not taken yet.";
+doc.text("Survey Result:", 10, 50);
+const splitResult = doc.splitTextToSize(resultText, 180);
+doc.text(splitResult, 10, 60);
+
+const tipsEls = document.querySelectorAll('.tips .card');
+if(tipsEls.length){
+doc.text("Cybersecurity Tips:", 10, 80 + splitResult.length*10);
+let y = 90 + splitResult.length*10;
+tipsEls.forEach((tip,i)=>{
+const tipLines = doc.splitTextToSize(`${i+1}. ${tip.innerText}`,180);
+doc.text(tipLines,10,y);
+y += tipLines.length*10;
+});
+}
+
+const visitorCount = document.getElementById('visitor-count')?.innerText || "0";
+doc.text(`Visitor Count: ${visitorCount}`, 10, 280);
+
+doc.save("CyberGuard_Awareness.pdf");
+});
+</script>
+
+</body>
+</html>

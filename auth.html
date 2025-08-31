@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberGuard - Login / Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+body{background:#0d0e12;color:#e0f7fa;display:flex;justify-content:center;align-items:center;height:100vh;}
+.container{background:rgba(0,0,0,0.85);padding:2rem;border:2px solid #0ff;border-radius:15px;box-shadow:0 0 20px #0ff;width:350px;}
+h2{text-align:center;margin-bottom:1rem;text-shadow:0 0 8px #0ff;}
+input{width:100%;padding:0.8rem;margin:0.5rem 0;border:none;border-radius:8px;}
+button{width:100%;padding:0.8rem;margin-top:1rem;border:none;border-radius:8px;background:#0ff;color:#000;font-weight:bold;cursor:pointer;}
+button:hover{background:#f0f;color:#fff;box-shadow:0 0 15px #f0f,0 0 25px #0ff;}
+.toggle{text-align:center;margin-top:1rem;cursor:pointer;color:#0ff;text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2 id="form-title">Login</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button id="actionBtn">Login</button>
+  <div class="toggle" id="toggleForm">Don't have an account? Register</div>
+</div>
+
+<script>
+// Toggle form
+let isLogin = true;
+document.getElementById('toggleForm').addEventListener('click', ()=>{
+  isLogin = !isLogin;
+  document.getElementById('form-title').textContent = isLogin?'Login':'Register';
+  document.getElementById('actionBtn').textContent = isLogin?'Login':'Register';
+  document.getElementById('toggleForm').textContent = isLogin?"Don't have an account? Register":"Already have an account? Login";
+});
+
+// Action Button
+document.getElementById('actionBtn').addEventListener('click', ()=>{
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  if(!email || !password){
+    alert("Please enter both email and password.");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem('users') || "{}");
+
+  if(isLogin){
+    // Login
+    if(users[email] && users[email] === password){
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('loggedInUser', email);
+      window.location.href='home.html';
+    } else {
+      alert("Invalid email or password.");
+    }
+  } else {
+    // Register
+    if(users[email]){
+      alert("Email already registered. Please login.");
+      return;
+    }
+    users[email] = password;
+    localStorage.setItem('users', JSON.stringify(users));
+    alert("Registration successful! Please login now.");
+    isLogin = true;
+    document.getElementById('form-title').textContent = 'Login';
+    document.getElementById('actionBtn').textContent = 'Login';
+    document.getElementById('toggleForm').textContent = "Don't have an account? Register";
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+  }
+});
+</script>
+
+</body>
+</html>
