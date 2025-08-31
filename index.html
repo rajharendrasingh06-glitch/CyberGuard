@@ -3,185 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CyberGuard - Home</title>
+<title>CyberGuard - Login / Register</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
-body{background:#0d0e12;color:#e0f7fa;overflow-x:hidden;}
-a{text-decoration:none;color:#0ff;}
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(0,0,0,0.85);border-bottom:2px solid #0ff;}
-.logo{font-size:1.8rem;font-weight:700;text-shadow:0 0 8px #0ff;}
-.nav-links li{display:inline-block;margin-left:1.5rem;position:relative;}
-.nav-links a{transition:0.3s;}
-.nav-links a:hover{color:#f0f;text-shadow:0 0 5px #f0f,0 0 10px #0ff;}
-.dropdown-menu{display:none;position:absolute;top:35px;left:0;background:rgba(0,0,0,0.9);border:1px solid #0ff;border-radius:5px;list-style:none;padding:0.5rem 0;min-width:220px;z-index:10;}
-.dropdown-menu li a{display:block;padding:0.5rem 1rem;color:#e0f7fa;}
-.dropdown:hover .dropdown-menu{display:block;}
-
-.container{max-width:1000px;margin:4rem auto;padding:2rem;}
-.section{margin-bottom:3rem;}
+body{background:#0d0e12;color:#e0f7fa;display:flex;justify-content:center;align-items:center;height:100vh;}
+.container{background:rgba(0,0,0,0.85);padding:2rem;border:2px solid #0ff;border-radius:15px;box-shadow:0 0 20px #0ff;width:350px;}
 h2{text-align:center;margin-bottom:1rem;text-shadow:0 0 8px #0ff;}
-.video-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;}
-.video-card{background:rgba(0,0,0,0.85);padding:1rem;border:2px solid #0ff;border-radius:12px;box-shadow:0 0 15px #0ff;color:#0ff;}
-.video-card iframe{width:100%;height:150px;border-radius:8px;}
-.video-title{font-weight:bold;margin-top:0.5rem;}
-.video-desc{font-size:0.9rem;margin-top:0.3rem;color:#ccc;}
-
-.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
-.tips .card{background:rgba(0,0,0,0.85);padding:1rem;border:2px solid #0ff;border-radius:12px;box-shadow:0 0 15px #0ff;color:#0ff;}
-
-#downloadCombinedPdfBtn{display:block;margin:20px auto;padding:10px 20px;background:#0ff;color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:bold;}
-#downloadCombinedPdfBtn:hover{background:#f0f;color:#fff;box-shadow:0 0 15px #f0f,0 0 25px #0ff;}
-
-footer{text-align:center;margin:4rem 1rem;color:#0ff;font-size:0.9rem;border-top:2px solid #0ff;padding-top:1rem;}
-footer a{color:#0ff;}
-#visitor-count{font-weight:bold;text-shadow:0 0 10px #0ff,0 0 20px #f0f;}
+input{width:100%;padding:0.8rem;margin:0.5rem 0;border:none;border-radius:8px;}
+button{width:100%;padding:0.8rem;margin-top:1rem;border:none;border-radius:8px;background:#0ff;color:#000;font-weight:bold;cursor:pointer;}
+button:hover{background:#f0f;color:#fff;box-shadow:0 0 15px #f0f,0 0 25px #0ff;}
+.toggle{text-align:center;margin-top:1rem;cursor:pointer;color:#0ff;text-decoration:underline;}
 </style>
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="logo">CyberGuard</div>
-  <ul class="nav-links">
-    <li><a href="home.html">Home</a></li>
-    <li><a href="survey.html">Survey</a></li>
-    <li class="dropdown">
-      <a href="#">Important Links ▼</a>
-      <ul class="dropdown-menu">
-        <li><a href="https://cybercrime.gov.in" target="_blank">Cybersecurity Complaints</a></li>
-        <li><a href="https://www.cert-in.org.in" target="_blank">CERT-In India</a></li>
-        <li><a href="https://www.ncsc.gov.in" target="_blank">NCSC</a></li>
-      </ul>
-    </li>
-    <li><a href="#" onclick="logout()">Logout</a></li>
-  </ul>
-</nav>
-
 <div class="container">
-  <!-- Videos Section -->
-  <div class="section">
-    <h2>Cybersecurity Awareness Videos</h2>
-    <div class="video-container">
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/lt3dUTByggs" allowfullscreen></iframe>
-        <div class="video-title">Cybersecurity Awareness Training</div>
-        <div class="video-desc">An in-depth training session covering various aspects of cybersecurity.</div>
-      </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/DUIHmF5sF_0" allowfullscreen></iframe>
-        <div class="video-title">Hyperlink Hazards: How to Stay Safe Online</div>
-        <div class="video-desc">Learn about the dangers of malicious hyperlinks and how to avoid them.</div>
-      </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/CT5gmh9cxpk" allowfullscreen></iframe>
-        <div class="video-title">Cybersecurity Awareness Training 2025</div>
-        <div class="video-desc">Updated training content for the year 2025 to keep you informed.</div>
-      </div>
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/JpfEBQn2CjM" allowfullscreen></iframe>
-        <div class="video-title">Pause, Think and Act - Cyber Security Awareness</div>
-        <div class="video-desc">A reminder to always pause and think before taking action online.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tips Section -->
-  <div class="section">
-    <h2>Cybersecurity Tips</h2>
-    <div class="tips">
-      <div class="card">Use strong, unique passwords for each account.</div>
-      <div class="card">Enable Two-Factor Authentication wherever possible.</div>
-      <div class="card">Regularly update devices and applications.</div>
-      <div class="card">Avoid clicking on suspicious links or attachments.</div>
-    </div>
-  </div>
-
-  <!-- Combined PDF Button -->
-  <button id="downloadCombinedPdfBtn">Download Full PDF</button>
+  <h2 id="form-title">Login</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button id="actionBtn">Login</button>
+  <div class="toggle" id="toggleForm">Don't have an account? Register</div>
 </div>
 
-<footer>
-© 2025 CyberGuard | Contact: <a href="mailto:rajharendrasingh06@gmail.com">rajharendrasingh06@gmail.com</a><br>
-Visitor Count: <span id="visitor-count">0</span>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// Visitor count
-let count = localStorage.getItem('visitorCount');
-count = count ? parseInt(count) + 1 : 1;
-localStorage.setItem('visitorCount', count);
-document.getElementById('visitor-count').textContent = count.toLocaleString();
+// Toggle form
+let isLogin = true;
+document.getElementById('toggleForm').addEventListener('click', ()=>{
+  isLogin = !isLogin;
+  document.getElementById('form-title').textContent = isLogin?'Login':'Register';
+  document.getElementById('actionBtn').textContent = isLogin?'Login':'Register';
+  document.getElementById('toggleForm').textContent = isLogin?"Don't have an account? Register":"Already have an account? Login";
+});
 
-// Login check
-const loggedInUser = localStorage.getItem('loggedInUser');
-if (!loggedInUser) {
-  alert('Please login first.');
-  window.location.href = 'auth.html';
-}
-
-// Logout
-function logout() {
-  localStorage.removeItem('loggedIn');
-  localStorage.removeItem('loggedInUser');
-  window.location.href = 'auth.html';
-}
-
-// Combined PDF download
-document.getElementById('downloadCombinedPdfBtn').addEventListener('click', () => {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  let y = 20;
-  doc.setFontSize(18);
-  doc.text("CyberGuard Full Report", 10, y);
-  y += 10;
-
-  const user = localStorage.getItem('loggedInUser') || "Guest";
-  doc.setFontSize(12);
-  doc.text(`User: ${user}`, 10, y);
-  y += 10;
-
-  // Survey Score
-  const surveyScore = localStorage.getItem('lastSurveyScore');
-  if(surveyScore){
-    doc.text("Survey Result:", 10, y);
-    doc.text(surveyScore, 10, y+10);
-    y += 20;
+// Action Button
+document.getElementById('actionBtn').addEventListener('click', ()=>{
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  if(!email || !password){
+    alert("Please enter both email and password.");
+    return;
   }
 
-  // Videos
-  const videos = document.querySelectorAll('.video-card');
-  if(videos.length){
-    doc.text("Videos:", 10, y);
-    y += 10;
-    videos.forEach((v,i)=>{
-      const title = v.querySelector('.video-title')?.innerText || `Video ${i+1}`;
-      const desc = v.querySelector('.video-desc')?.innerText || '';
-      const lines = doc.splitTextToSize(`${i+1}. ${title} - ${desc}`, 180);
-      doc.text(lines, 10, y);
-      y += lines.length*10;
-    });
-    y += 5;
+  let users = JSON.parse(localStorage.getItem('users') || "{}");
+
+  if(isLogin){
+    // Login
+    if(users[email] && users[email] === password){
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('loggedInUser', email);
+      window.location.href='home.html';
+    } else {
+      alert("Invalid email or password.");
+    }
+  } else {
+    // Register
+    if(users[email]){
+      alert("Email already registered. Please login.");
+      return;
+    }
+    users[email] = password;
+    localStorage.setItem('users', JSON.stringify(users));
+    alert("Registration successful! Please login now.");
+    isLogin = true;
+    document.getElementById('form-title').textContent = 'Login';
+    document.getElementById('actionBtn').textContent = 'Login';
+    document.getElementById('toggleForm').textContent = "Don't have an account? Register";
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
   }
-
-  // Tips
-  const tipsEls = document.querySelectorAll('.tips .card');
-  if(tipsEls.length){
-    doc.text("Tips:", 10, y);
-    y += 10;
-    tipsEls.forEach((tip,i)=>{
-      const tipLines = doc.splitTextToSize(`${i+1}. ${tip.innerText}`, 180);
-      doc.text(tipLines, 10, y);
-      y += tipLines.length*10;
-    });
-  }
-
-  // Visitor Count
-  const visitorCount = document.getElementById('visitor-count')?.innerText || "0";
-  doc.text(`Visitor Count: ${visitorCount}`, 10, y+10);
-
-  doc.save("CyberGuard_Full_Report.pdf");
 });
 </script>
+
 </body>
 </html>
